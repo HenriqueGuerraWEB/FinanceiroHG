@@ -12,6 +12,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -56,6 +57,15 @@
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarReceber">                           
                                     <a class="nav-link" href="{{ route('receber.index') }}">Todos Receber</a>
                                     <a class="nav-link" href="{{ route('receber.create') }}">Novo Receber</a>
+                                </div>
+                            </li>   
+                            <li class="nav-item dropdown">
+                                <a id="navbarPagar" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Pagar
+                                </a>     
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarPagar">                           
+                                    <a class="nav-link" href="{{ route('pagar.index') }}">Todos Pagar</a>
+                                    <a class="nav-link" href="{{ route('pagar.create') }}">Novo Pagar</a>
                                 </div>
                             </li>                        
                             <li class="nav-item dropdown">

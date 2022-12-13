@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Painel') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +14,11 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('Selecione uma opção') }}
+                    <div class="mt-4">
+                        <a href="{{ route('receber.index') }}" class="btn btn-success">Receber</a>
+                        <a href="{{ route('pagar.index') }}" class="btn btn-danger">Pagar</a>                    
+                    </div>
                 </div>
             </div>
         </div>

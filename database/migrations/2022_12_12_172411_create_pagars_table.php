@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('data');
             $table->string('empresa');
             $table->string('valor');
-            $table->string('observacao');
+            $table->longText('observacao')->nullable();
             $table->timestamps();
         });
     }

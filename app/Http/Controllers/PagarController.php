@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\receber;
+use App\Models\pagar;
 
-class ReceberController extends Controller
+class PagarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class ReceberController extends Controller
     public function index()
     {
         //
-        $receber = Receber::all();
-        return view('receber.index', compact('receber'));        
+        $pagar = Pagar::all();
+        return view('pagar.index', compact('pagar'));         
     }
 
     /**
@@ -27,7 +27,7 @@ class ReceberController extends Controller
     public function create()
     {
         //
-        return view('receber.create');
+        return view('pagar.create');
     }
 
     /**
@@ -41,15 +41,13 @@ class ReceberController extends Controller
         //
         $storeData = $request->validate([
             'data' => 'required|max:255',
-            'valor' => 'required|numeric',
             'empresa' => 'max:255',
-            'adicional' => '',
-            'total' => 'required|numeric',
+            'valor' => 'required|numeric',
             'observacao' => ''
         ]);
-        $receber = Receber::create($storeData);
+        $pagar = Pagar::create($storeData);
         //return redirect('/recebers')->with('completed', 'Conta cadastrada!');
-        return redirect()->route('receber.index')->with('success','Conta criada com sucesso.');        
+        return redirect()->route('pagar.index')->with('success','Conta criada com sucesso.');         
     }
 
     /**
@@ -72,8 +70,8 @@ class ReceberController extends Controller
     public function edit($id)
     {
         //
-        $receber = Receber::findOrFail($id);
-        return view('receber.edit', compact('receber'));        
+        $pagar = Pagar::findOrFail($id);
+        return view('pagar.edit', compact('pagar'));         
     }
 
     /**
@@ -88,14 +86,13 @@ class ReceberController extends Controller
         //
         $updateData = $request->validate([
             'data' => 'required|max:255',
+            'empresa' => 'max:255',
             'valor' => 'required|numeric',
-            'adicional' => 'required|numeric',
-            'total' => 'required|numeric',
-            'observacao' => 'required|max:255',
+            'observacao' => ''
         ]);
-        Receber::whereId($id)->update($updateData);
+        Pagar::whereId($id)->update($updateData);
         //return redirect('/recebers')->with('completed', 'Conta Atualizada.');       
-        return redirect()->route('receber.index')->with('success','Conta atualizada.'); 
+        return redirect()->route('pagar.index')->with('success','Conta atualizada.');         
     }
 
     /**
@@ -107,9 +104,9 @@ class ReceberController extends Controller
     public function destroy($id)
     {
         //
-        $receber = Receber::findOrFail($id);
-        $receber->delete();
+        $pagar = Pagar::findOrFail($id);
+        $pagar->delete();
         //return redirect('/recebers')->with('completed', 'Conta apagada.');        
-        return redirect()->route('receber.index')->with('success','Conta apagada!');
+        return redirect()->route('pagar.index')->with('success','Conta apagada!');        
     }
 }

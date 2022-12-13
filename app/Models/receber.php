@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class receber extends Model
 {
     use HasFactory;
-    protected $fillable = ['data', 'valor', 'adicional', 'total', 'observacao'];
+    protected $fillable = ['data', 'empresa', 'valor', 'adicional', 'total', 'observacao'];
 }

@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('recebers', function (Blueprint $table) {
             $table->id();
             $table->date('data');
+            $table->string('empresa')->nullable();
             $table->string('valor');
-            $table->string('adicional');
+            $table->string('adicional')->nullable();
             $table->string('total');
             $table->longText('observacao')->nullable();
             $table->timestamps();

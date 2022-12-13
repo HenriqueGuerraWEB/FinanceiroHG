@@ -1,9 +1,9 @@
-@extends('receber.layout')
+@extends('pagar.layout')
 @section('content')
 <div class="container">
     <div class="card mt-5">
         <div class="card-header">
-          Editar conta a receber
+          Editar conta a pagar
         </div>
         <div class="card-body">
           @if ($errors->any())
@@ -15,48 +15,36 @@
               </ul>
             </div><br />
           @endif
-            <form method="post" action="{{ route('receber.update', $receber->id) }}">
+            <form method="post" action="{{ route('pagar.update', $pagar->id) }}">
                 @csrf
                 @method('PATCH')
                 <div class="row">
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="data">Data</label>
-                            <input type="date" class="form-control" name="data" value="{{ $receber->data }}"/>
+                            <input type="date" class="form-control" name="data" value="{{ $pagar->data }}"/>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-8">
                         <div class="form-group">
                             <label for="empresa">Empresa</label>
-                            <input type="text" class="form-control" name="empresa" value="{{ $receber->empresa }}"/>
+                            <input type="text" class="form-control" name="empresa" value="{{ $pagar->empresa }}"/>
                         </div>
                     </div>                     
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="valor">Valor</label>
-                            <input type="number" class="form-control" name="valor" value="{{ $receber->valor }}"/>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="adicional">Valor Adicional</label>
-                            <input type="number" class="form-control" name="adicional" value="{{ $receber->adicional }}"/>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="total">Valor Total</label>
-                            <input type="number" class="form-control" name="total" value="{{ $receber->total }}"/>
+                            <input type="number" class="form-control" name="valor" value="{{ $pagar->valor }}"/>
                         </div>
                     </div>
                     <div class="col-md-12 mt-3 mb-3">
                         <div class="form-group">
                             <label for="observacao">Observação</label>
-                            <textarea name="observacao" id="observacao" cols="30" rows="10" class="form-control">{{ $receber->observacao }}</textarea>
+                            <textarea name="observacao" id="observacao" cols="30" rows="10" class="form-control">{{ $pagar->observacao }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-block btn-success" style="width: 100%">Criar nova conta a receber</button>
+                        <button type="submit" class="btn btn-block btn-success" style="width: 100%">Criar nova conta a pagar</button>
                     </div>
                 </div>
             </form>
