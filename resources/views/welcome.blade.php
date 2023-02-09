@@ -2,6 +2,9 @@
 @section('content')
 
 <div class="container">
+
+    @guest
+    @if (Route::has('login'))
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
@@ -59,6 +62,15 @@
             </div>
         </div>
     </form>
+    @endif
+    @else
+    <div class="text-center mt-5">
+        <h1>Você já está logado!</h1>
+        <a href="{{ route('home') }}" class="link-danger">Voltar para o sistema.</a>
+    </div>
+    
+    
+    @endguest    
 </div>
 
 @endsection

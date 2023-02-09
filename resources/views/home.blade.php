@@ -13,12 +13,27 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    {{ __('Selecione uma opção') }}
-                    <div class="mt-4">
-                        <a href="{{ route('receber.index') }}" class="btn btn-success">Receber</a>
-                        <a href="{{ route('pagar.index') }}" class="btn btn-danger">Pagar</a>                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ __('Selecione uma opção') }}
+                            <div class="mt-4">
+                                <a href="{{ route('empresa.index') }}" class="btn btn-primary">Empresas</a>
+                                <a href="{{ route('receber.index') }}" class="btn btn-success">Receber</a>
+                                <a href="{{ route('pagar.index') }}" class="btn btn-danger">Pagar</a>                    
+                            </div>                            
+                        </div>
+                        <div class="col-md-6">
+                            @foreach ($receber as $recebers)
+                                {{$recebers->total}}
+                            @endforeach
+                            <p><b>Total a receber:</b> #VALOR</p>
+                            @foreach ($pagar as $pagars)
+                                {{$pagars->valor}}
+                            @endforeach                            
+                            <p><b>Total a Pagar:</b> #VALOR</p>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>

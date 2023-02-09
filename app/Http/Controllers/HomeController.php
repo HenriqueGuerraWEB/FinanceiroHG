@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\pagar;
+use App\Models\receber;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $pagar = Pagar::all();
+        $receber = Receber::all();
+        return view('home', compact('pagar', 'receber'));
     }
 }

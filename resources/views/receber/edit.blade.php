@@ -1,4 +1,4 @@
-@extends('receber.layout')
+@extends('layouts.app')
 @section('content')
 <div class="container">
     <div class="card mt-5">
@@ -28,25 +28,33 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="empresa">Empresa</label>
-                            <input type="text" class="form-control" name="empresa" value="{{ $receber->empresa }}"/>
+                            <!--<input type="text" class="form-control" name="empresa" value="{{ $receber->empresa }}"/>-->
+                            <select id="select-beast" placeholder="Selecione uma opção..." autocomplete="on" name="empresa_id">
+                                <option value="">Selecione uma opção...</option>                                
+                                @foreach($empresas as $empresa)   
+                                    @if($empresa->receber)                     
+                                        <option value="{{$empresa->id}}" @if($empresa->id == $receber->empresa_id) @selected(true) @endif>{{$empresa->nome}}</option>
+                                    @endif
+                                @endforeach
+                            </select>                            
                         </div>
                     </div>                     
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="valor">Valor</label>
-                            <input type="number" class="form-control" name="valor" value="{{ $receber->valor }}"/>
+                            <input id="soma1" type="number" class="form-control somarInput" name="valor" value="{{ $receber->valor }}"/>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="adicional">Valor Adicional</label>
-                            <input type="number" class="form-control" name="adicional" value="{{ $receber->adicional }}"/>
+                            <input id="soma2" type="number" class="form-control somarInput" name="adicional" value="{{ $receber->adicional }}"/>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="total">Valor Total</label>
-                            <input type="number" class="form-control" name="total" value="{{ $receber->total }}"/>
+                            <input id="result" type="number" class="form-control" name="total" value="{{ $receber->total }}"/>
                         </div>
                     </div>
                     <div class="col-md-12 mt-3 mb-3">
@@ -56,11 +64,32 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-block btn-success" style="width: 100%">Criar nova conta a receber</button>
+                        <button type="submit" class="btn btn-block btn-success" style="width: 100%">Atualizar conta a receber</button>
                     </div>
                 </div>
             </form>
         </div>
       </div>
 </div>
+<script>
+    jQuery(document).ready(function(){
+      jQuery('.somarInput').on('keyup',function(){
+        if(jQuery(this).attr('name') === 'result'){
+        return false;
+        }
+      
+        var soma1 = (jQuery('#soma1').val() == '' ? 0 : jQuery('#soma1').val());
+        var soma2 = (jQuery('#soma2').val() == '' ? 0 : jQuery('#soma2').val());
+        var result = (parseInt(soma1) + parseInt(soma2));
+        jQuery('#result').val(result);
+      });
+    });  
+    new TomSelect("#select-beast",{
+        create: true,
+        sortField: {
+            field: "text",
+            direction: "asc"
+        }
+    });    
+</script>
 @endsection

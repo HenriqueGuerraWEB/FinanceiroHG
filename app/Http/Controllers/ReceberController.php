@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\receber;
+use App\Models\Empresa;
 
 class ReceberController extends Controller
 {
@@ -27,7 +28,8 @@ class ReceberController extends Controller
     public function create()
     {
         //
-        return view('receber.create');
+        $empresas = Empresa::all();
+        return view('receber.create', compact('empresas'));
     }
 
     /**
@@ -42,7 +44,7 @@ class ReceberController extends Controller
         $storeData = $request->validate([
             'data' => 'required|max:255',
             'valor' => 'required|numeric',
-            'empresa' => 'max:255',
+            'empresa_id' => 'required|numeric',
             'adicional' => '',
             'total' => 'required|numeric',
             'observacao' => ''
@@ -72,8 +74,9 @@ class ReceberController extends Controller
     public function edit($id)
     {
         //
+        $empresas = Empresa::all();
         $receber = Receber::findOrFail($id);
-        return view('receber.edit', compact('receber'));        
+        return view('receber.edit', compact('receber','empresas'));        
     }
 
     /**
@@ -89,9 +92,10 @@ class ReceberController extends Controller
         $updateData = $request->validate([
             'data' => 'required|max:255',
             'valor' => 'required|numeric',
-            'adicional' => 'required|numeric',
+            'empresa_id' => 'required|numeric',
+            'adicional' => '',
             'total' => 'required|numeric',
-            'observacao' => 'required|max:255',
+            'observacao' => ''
         ]);
         Receber::whereId($id)->update($updateData);
         //return redirect('/recebers')->with('completed', 'Conta Atualizada.');       

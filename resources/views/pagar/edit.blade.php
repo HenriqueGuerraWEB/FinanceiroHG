@@ -1,4 +1,4 @@
-@extends('pagar.layout')
+@extends('layouts.app')
 @section('content')
 <div class="container">
     <div class="card mt-5">
@@ -28,7 +28,14 @@
                     <div class="col-md-8">
                         <div class="form-group">
                             <label for="empresa">Empresa</label>
-                            <input type="text" class="form-control" name="empresa" value="{{ $pagar->empresa }}"/>
+                            <select id="select-beast" placeholder="Selecione uma opção..." autocomplete="on" name="empresa_id">
+                                <option value="">Selecione uma opção...</option>                                
+                                @foreach($empresas as $empresa)   
+                                    @if($empresa->pagar)                     
+                                        <option value="{{$empresa->id}}" @if($empresa->id == $pagar->empresa_id) @selected(true) @endif>{{$empresa->nome}}</option>
+                                    @endif
+                                @endforeach
+                            </select>                            
                         </div>
                     </div>                     
                     <div class="col-md-2">
@@ -44,11 +51,20 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-block btn-success" style="width: 100%">Criar nova conta a pagar</button>
+                        <button type="submit" class="btn btn-block btn-success" style="width: 100%">Atualizar conta a pagar</button>
                     </div>
                 </div>
             </form>
         </div>
       </div>
 </div>
+<script>
+    new TomSelect("#select-beast",{
+        create: true,
+        sortField: {
+            field: "text",
+            direction: "asc"
+        }
+    });    
+</script>
 @endsection

@@ -1,4 +1,4 @@
-@extends('pagar.layout')
+@extends('layouts.app')
 @section('content')
 <style>
   .push-top {
@@ -35,7 +35,7 @@
         <tr>
             <td>{{$pagars->id}}</td>
             <td>{{ date('d/m/Y', strtotime($pagars->data)); }}</td>
-            <td>{{$pagars->empresa}}</td>
+            <td>{{$pagars->empresa->nome}}</td>
             <td>{{$pagars->valor}}</td>
             <td>{{$pagars->observacao}}</td>
             <td class="text-center">

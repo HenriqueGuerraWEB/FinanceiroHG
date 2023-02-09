@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReceberController;
 use App\Http\Controllers\PagarController;
+use App\Http\Controllers\EmpresaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('receber', ReceberController::class);
 Route::resource('pagar', PagarController::class);
+Route::resource('empresa', EmpresaController::class);

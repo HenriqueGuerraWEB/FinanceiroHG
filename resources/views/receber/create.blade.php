@@ -1,4 +1,4 @@
-@extends('receber.layout')
+@extends('layouts.app')
 @section('content')
 <div class="container">
     <div class="card mt-5">
@@ -27,7 +27,15 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="empresa">Empresa</label>
-                            <input type="text" class="form-control" name="empresa"/>
+                            <!--<input type="text" class="form-control" name="empresa"/>-->
+                            <select id="select-beast" placeholder="Selecione uma opção..." autocomplete="on" name="empresa_id">
+                                <option value="">Selecione uma opção...</option>                                
+                                @foreach($empresas as $empresa)   
+                                    @if($empresa->receber)                     
+                                        <option value="{{$empresa->id}}">{{$empresa->nome}}</option>
+                                    @endif
+                                @endforeach
+                            </select>                            
                         </div>
                     </div>                    
                     <div class="col-md-2">
@@ -75,5 +83,12 @@
         jQuery('#result').val(result);
       });
     });  
-    </script>
+    new TomSelect("#select-beast",{
+        create: true,
+        sortField: {
+            field: "text",
+            direction: "asc"
+        }
+    });    
+</script>
 @endsection

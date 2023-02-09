@@ -1,4 +1,4 @@
-@extends('pagar.layout')
+@extends('layouts.app')
 @section('content')
 <div class="container">
     <div class="card mt-5">
@@ -16,10 +16,10 @@
             </div><br />
           @endif
             <form method="post" action="{{ route('pagar.store') }}">
+                @csrf
                 <div class="row">
                     <div class="col-md-2">
                         <div class="form-group">
-                            @csrf
                             <label for="data">Data</label>
                             <input type="date" class="form-control" name="data"/>
                         </div>
@@ -27,7 +27,15 @@
                     <div class="col-md-8">
                         <div class="form-group">
                             <label for="empresa">Empresa</label>
-                            <input type="text" class="form-control" name="empresa"/>
+                            <!--<input type="text" class="form-control" name="empresa"/>-->
+                            <select id="select-beast" placeholder="Selecione uma opção..." autocomplete="on" name="empresa_id">
+                                <option value="">Selecione uma opção...</option>                                
+                                @foreach($empresas as $empresa)   
+                                    @if($empresa->pagar)                     
+                                        <option value="{{$empresa->id}}">{{$empresa->nome}}</option>
+                                    @endif
+                                @endforeach
+                            </select>                            
                         </div>
                     </div>                    
                     <div class="col-md-2">
@@ -50,4 +58,13 @@
         </div>
       </div>
 </div>
+<script>
+new TomSelect("#select-beast",{
+    create: true,
+    sortField: {
+        field: "text",
+        direction: "asc"
+    }
+});    
+</script>
 @endsection

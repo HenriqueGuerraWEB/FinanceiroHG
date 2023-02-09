@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('pagars', function (Blueprint $table) {
             $table->id();
             $table->date('data');
-            $table->string('empresa');
+            $table->string('empresa_id');
             $table->string('valor');
             $table->longText('observacao')->nullable();
             $table->timestamps();

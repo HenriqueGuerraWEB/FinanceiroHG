@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\pagar;
+use App\Models\Empresa;
 
 class PagarController extends Controller
 {
@@ -27,7 +28,8 @@ class PagarController extends Controller
     public function create()
     {
         //
-        return view('pagar.create');
+        $empresas = Empresa::all();
+        return view('pagar.create', compact('empresas'));
     }
 
     /**
@@ -41,7 +43,7 @@ class PagarController extends Controller
         //
         $storeData = $request->validate([
             'data' => 'required|max:255',
-            'empresa' => 'max:255',
+            'empresa_id' => 'required|numeric',
             'valor' => 'required|numeric',
             'observacao' => ''
         ]);
@@ -70,8 +72,9 @@ class PagarController extends Controller
     public function edit($id)
     {
         //
+        $empresas = Empresa::all();
         $pagar = Pagar::findOrFail($id);
-        return view('pagar.edit', compact('pagar'));         
+        return view('pagar.edit', compact('pagar', 'empresas'));         
     }
 
     /**
@@ -86,7 +89,7 @@ class PagarController extends Controller
         //
         $updateData = $request->validate([
             'data' => 'required|max:255',
-            'empresa' => 'max:255',
+            'empresa_id' => 'required|numeric',
             'valor' => 'required|numeric',
             'observacao' => ''
         ]);
